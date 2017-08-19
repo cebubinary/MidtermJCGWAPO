@@ -1,0 +1,26 @@
+﻿@model MvcApplication2.Models.Account
+
+@using(Html.BeginForm("Add","Admin"))
+{
+@Html.LabelFor(asd => asd.Id)
+@Html.EditorFor(asd => asd.Id)
+<br />
+@Html.LabelFor(asd=>asd.Username)
+@Html.EditorFor(asd=>asd.Username)
+<br />
+@Html.LabelFor(asd => asd.Password)
+@Html.EditorFor(asd => asd.Password)
+<br />
+@Html.LabelFor(asd => asd.Name)
+@Html.EditorFor(asd => asd.Name)
+
+    <br />
+@Html.LabelFor(asd => asd.Age)
+@Html.EditorFor(asd => asd.Age)
+
+    <br />
+@Html.LabelFor(asd => asd.Address)
+@Html.EditorFor(asd => asd.Address)    
+    <br />
+<button type="submit">ADD</button>
+}

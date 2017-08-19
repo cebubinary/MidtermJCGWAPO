@@ -1,0 +1,40 @@
+﻿@model IEnumerable<MvcApplication2.Models.Account>
+
+
+
+
+<form method="get" action="@Url.Action("Index", "Admin")">
+    <label>Search Data</label>
+    <input type="text" name="search" />
+    <button type="submit">Search</button>
+</form>
+
+@Html.ActionLink("Logout","Logout")
+<br />
+@Html.ActionLink("Add", "Add")
+
+<br/>                                       
+    
+@foreach (var item in Model)
+{
+    
+    @Html.DisplayFor(asdf => item.Id);
+    <text>&nbsp;</text>
+    @Html.DisplayFor(asdf => item.Name);
+    <text>&nbsp;</text>
+    @Html.DisplayFor(asdf => item.Age);
+    <text>&nbsp;</text>
+    @Html.DisplayFor(asdf => item.Password);
+    <text>&nbsp;</text>
+    @Html.DisplayFor(asdf => item.Username);
+    <text>&nbsp;</text>
+    @Html.DisplayFor(asdf => item.Address);
+    <text>&nbsp;</text>
+
+    @Html.ActionLink("Edit", "Edit", new { Id = item.Id })
+    <text>&nbsp;</text>
+
+    @Html.ActionLink("Delete", "Delete", new { Id = item.Id })
+    <br />
+
+}
