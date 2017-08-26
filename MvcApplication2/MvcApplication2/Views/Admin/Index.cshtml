@@ -1,6 +1,12 @@
 ﻿@model IEnumerable<MvcApplication2.Models.Account>
 
+@Html.ActionLink("Home","Index","Home") 
 
+<br />
+
+
+@Html.ActionLink("Logout","Logout")
+<br />
 
 
 <form method="get" action="@Url.Action("Index", "Admin")">
@@ -9,8 +15,6 @@
     <button type="submit">Search</button>
 </form>
 
-@Html.ActionLink("Logout","Logout")
-<br />
 @Html.ActionLink("Add", "Add")
 
 <br/>                                       

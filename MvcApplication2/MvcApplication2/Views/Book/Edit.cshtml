@@ -1,0 +1,16 @@
+﻿@model MvcApplication2.Models.Book
+
+@using (Html.BeginForm("Add", "Book"))
+{
+    @Html.LabelFor(asd=>asd.ID)
+    @Html.EditorFor(asd => asd.ID)
+    <br />
+    @Html.LabelFor(asd => asd.BookTitle)
+    @Html.EditorFor(asd => asd.BookTitle)
+    <br />
+    @Html.LabelFor(asd => asd.Author)
+    @Html.EditorFor(asd => asd.Author)
+    <br />
+    <button type="submit">Edit</button>
+    
+    }

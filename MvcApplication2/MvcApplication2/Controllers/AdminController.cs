@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using MvcApplication2.Models;
+using MvcApplication2.Utils;
 
 namespace MvcApplication2.Controllers
 {
@@ -14,59 +15,30 @@ namespace MvcApplication2.Controllers
 
             if (search != "")
             {
-                return View(Information.Context.Accounts.Where(a => a.Name == search));
+                return View(AccountsUtils.GetAccounts().Where(a => a.Name == search));
             }
             
-            return View(Information.Context.Accounts);
+            return View(AccountsUtils.GetAccounts());
         }
 
         public ActionResult Add(Account acc)
         {
-            Save(acc);
+
             if (acc.Name != null)
             {
-                return RedirectToAction("Index");
-                
+                AccountsUtils.Save(acc);
+                return RedirectToAction("Index");                
             }
             return View();
         }
-        public ActionResult Save(Account acc)
-        {
-            var selected = Information.Context.Accounts.FirstOrDefault(x => x.Id == acc.Id);
-            if (selected != null)
-            {
-                selected.Name = acc.Name;
-                selected.Age = acc.Age;
-                selected.Username = acc.Username;
-                selected.Password = acc.Password;
-                selected.Address = acc.Address;
-              
-            }
-            else
-            {
-                
-                acc.Id = Information.Context.NextId();
-                Information.Context.Accounts.Add(acc);
-
-            }
-            return RedirectToAction("Index");
-        }
+       
         public ActionResult Edit(Account acc)
         {
-            
-         
-
-            return View(Information.Context.Accounts.FirstOrDefault(x => x.Id == acc.Id));
+            return View(AccountsUtils.GetAccounts(acc.Id).FirstOrDefault());
         }
         public ActionResult Delete(int id)
         {
-            var selected = Information.Context.Accounts.FirstOrDefault(x => x.Id == id);
-            if (selected != null)
-            {
-                
-                Information.Context.Accounts.Remove(selected);
-
-            }
+            AccountsUtils.Delete(id);
             return RedirectToAction("Index");
         }
         public ActionResult Search(string search)
@@ -76,20 +48,20 @@ namespace MvcApplication2.Controllers
 
         public ActionResult Login(string username, string password)
         {
-            
-          var selectedUser = Information.Context.Accounts.FirstOrDefault(x => x.Username == username && x.Password==password);
-          
-         
-          if (selectedUser!=null)
+
+
+          if (AccountsUtils.ValidUserNamePassword(username,password))
           {
-              return RedirectToAction("Index");
+              return RedirectToAction("Index", "Home");
           }
           if (password != null && username != null)
           {
               ViewBag.Error = "Error message";
+              return RedirectToAction("Logout");
+
           }
 
-          return View();
+           return RedirectToAction("Index");
         }
         public ActionResult Logout()
         {
